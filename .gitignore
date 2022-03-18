@@ -6,3 +6,7 @@
 /Code/HealthJournals/.vs/Health/config/applicationhost.config
 /Code/HealthJournalsIdentityServer/.vs/HealthJournals/config/applicationhost.config
 /Code/HealthJournalsIdentityServer/.vs/HealthJournals/v16/.suo
+/Code/HealthJournalsIdentityServer/bin/Debug/netcoreapp3.1
+/Code/HealthJournalsIdentityServer/obj
+/.vs/Health_Fitness_Journal_Portal/v16/.suo
+/.vs/VSWorkspaceState.json
