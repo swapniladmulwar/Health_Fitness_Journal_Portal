@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Code/HealthJournals/.vs/Health/v16
+/Code/HealthJournals/.vs/Health/config/applicationhost.config
+/Code/HealthJournalsIdentityServer/.vs/HealthJournals/config/applicationhost.config
+/Code/HealthJournalsIdentityServer/.vs/HealthJournals/v16/.suo
