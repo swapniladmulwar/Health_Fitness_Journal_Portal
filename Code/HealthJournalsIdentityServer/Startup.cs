@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HealthJournalsIdentityserver;
 using IdentityServer4;
+using IdentityServer4.Services;
 using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,11 +32,12 @@ namespace HealthJournals
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddIdentityServer()
+                //.AddProfileService<ProfileService>()
                 .AddInMemoryIdentityResources(Config.IdentityResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddTestUsers(TestUsers.Users)
-                .AddDeveloperSigningCredential();           
+                .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

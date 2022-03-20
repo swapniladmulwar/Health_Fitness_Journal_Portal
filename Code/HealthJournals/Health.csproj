@@ -8,4 +8,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.23" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HealthBAL\HealthBAL.csproj" />
+  </ItemGroup>
+
 </Project>

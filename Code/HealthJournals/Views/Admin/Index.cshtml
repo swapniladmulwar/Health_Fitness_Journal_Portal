@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HealthBAL.FileBAL>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div><b>Health and Fitness Journals</b><br /></div>
+<br />
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Document ID </th>
+        <th>File Name </th>
+        <th>File Type </th>
+        <th>File Link</th>
+        <th>Created On</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.DocumentId</td>
+            <td>@d.Name</td>
+            <td>@d.FileType</td>
+            <td>@Html.ActionLink("View Details", "Details", "Admin", new { id = d.DocumentId }, null)</td>
+            <td>@d.CreatedOn</td>
+        </tr>
+
+    }    
+</table>  
+
+<div class="row">
+    <div class="col-md-5">
+        <form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="Index">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload Health and fitness journals</p>
+                    <input class="form-control" name="files" type="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input class="btn btn-success" type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

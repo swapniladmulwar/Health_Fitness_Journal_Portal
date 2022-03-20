@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthBAL;
+using HealthConfiguration;
+using HealthDAL;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,8 +46,25 @@ namespace Health
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
 
-                //options.SaveTokens = true;
+                options.SaveTokens = true;
+                options.Scope.Clear();
+                options.Scope.Add("openid");
+                options.Scope.Add("profile");
+                options.GetClaimsFromUserInfoEndpoint = true;
+                options.Scope.Add("verification");
+                options.ClaimActions.MapJsonKey("role", "role");
+                options.ClaimActions.MapJsonKey("email", "email");
             });
+
+            // Add functionality to inject IOptions<T>
+            services.AddOptions();
+
+            // Add our Config object so it can be injected
+            services.Configure<Settings>(Configuration.GetSection("Settings"));
+
+            services.AddTransient<IHealthBALOperation, HealthBALOperation>();
+            services.AddTransient<IHealthDALOperation, HealthDALOperation>();
+            services.AddDbContext<FileDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

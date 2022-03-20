@@ -19,9 +19,14 @@ namespace Health.Controllers
         {
             _logger = logger;
         }
-        public IActionResult Index()
+        public RedirectToActionResult Index()
         {
-            return View();
+            var role = User.Claims.Single(c => c.Type == "role").Value;
+            if ("admin".Equals(role, StringComparison.InvariantCultureIgnoreCase))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("Index", "User");
         }
 
         public IActionResult Privacy()

@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,15 @@ namespace HealthJournalsIdentityserver
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                new IdentityResource()
+                {
+                    Name = "verification",
+                    UserClaims = new List<string>
+                    {
+                        JwtClaimTypes.Role,
+                        JwtClaimTypes.Email
+                    }
+                }
             };
 
         public static IEnumerable<Client> Clients =>
@@ -36,7 +46,8 @@ namespace HealthJournalsIdentityserver
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    IdentityServerConstants.StandardScopes.Profile
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "verification"
                 }
             }
         };

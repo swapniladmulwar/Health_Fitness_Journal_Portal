@@ -12,3 +12,10 @@
 /.vs/VSWorkspaceState.json
 /Code/HealthJournals/bin/Debug/netcoreapp3.1
 /Code/HealthJournals/obj
+/Code/HealthBAL/bin/Debug/netcoreapp3.1
+/Code/HealthBAL/obj
+/Code/HealthConfiguration/bin/Debug/netcoreapp3.1
+/Code/HealthConfiguration/obj/Debug/netcoreapp3.1
+/Code/HealthConfiguration/obj
+/Code/HealthDAL/bin/Debug/netcoreapp3.1
+/Code/HealthDAL/obj

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<HealthBAL.FileBAL>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div><b>Health and Fitness Journals</b><br /></div>
+<br />
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Document ID </th>
+        <th>File Name </th>
+        <th>File Type </th>
+        <th>File Link</th>
+        <th>Created On</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+            <td>@d.DocumentId</td>
+            <td>@d.Name</td>
+            <td>@d.FileType</td>
+            <td>@Html.ActionLink("View Details", "Details", "Admin", new { id = d.DocumentId }, null)</td>
+            <td>@d.CreatedOn</td>
+        </tr>
+
+    }
+</table>  
