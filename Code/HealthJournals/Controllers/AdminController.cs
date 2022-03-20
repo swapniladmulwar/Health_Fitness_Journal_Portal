@@ -15,7 +15,7 @@ namespace Health.Controllers
 
         public AdminController(IHealthBALOperation healthBALOperation)
         {
-            _healthBALOperation = healthBALOperation;
+            _healthBALOperation = healthBALOperation ?? throw new ArgumentNullException(nameof(healthBALOperation));
         }
         // GET: AdminController
         public ActionResult Index()

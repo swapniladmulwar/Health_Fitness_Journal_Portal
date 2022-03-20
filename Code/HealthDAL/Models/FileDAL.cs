@@ -9,6 +9,7 @@ namespace HealthDAL
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [ForeignKey("DocumentId")]
         public int DocumentId { get; set; }
         [MaxLength(100)]
         public string Name { get; set; }

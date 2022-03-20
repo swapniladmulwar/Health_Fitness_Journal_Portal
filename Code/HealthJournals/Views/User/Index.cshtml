@@ -1,10 +1,24 @@
-﻿@model IEnumerable<HealthBAL.FileBAL>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 <div><b>Health and Fitness Journals</b><br /></div>
 <br />
+
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+@{
+
+    IEnumerable<HealthBAL.FileBAL> subscribedFiles = ViewData["SubscribedFiles"] as IEnumerable<HealthBAL.FileBAL>;
+    IEnumerable<HealthBAL.FileBAL> searched = ViewData["Searched"] as IEnumerable<HealthBAL.FileBAL>;
+}
+
+<div><b>Searched Health and Fitness Journals</b><br /></div>
 <table class="table table-bordered table-responsive table-hover">
     <tr>
         <th>Document ID </th>
@@ -12,16 +26,40 @@
         <th>File Type </th>
         <th>File Link</th>
         <th>Created On</th>
+        <th>Subscribtion</th>
     </tr>
-    @foreach (var d in Model)
+    @foreach (var d in searched)
     {
         <tr>
             <td>@d.DocumentId</td>
             <td>@d.Name</td>
             <td>@d.FileType</td>
-            <td>@Html.ActionLink("View Details", "Details", "Admin", new { id = d.DocumentId }, null)</td>
+            <td>@Html.ActionLink("View Details", "Details", "User", new { id = d.DocumentId }, null)</td>
             <td>@d.CreatedOn</td>
+            <td>@Html.ActionLink("Subscribtion", "Subscribtion", "User", new { id = d.DocumentId }, null)</td>
         </tr>
+    }
+</table>
 
+<div><b>Subscribed Health and Fitness Journals</b><br /></div>
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Document ID </th>
+        <th>File Name </th>
+        <th>File Type </th>
+        <th>File Link</th>
+        <th>Created On</th>
+        <th>Subscribtion</th>
+    </tr>
+    @foreach (var d in subscribedFiles)
+    {
+        <tr>
+            <td>@d.DocumentId</td>
+            <td>@d.Name</td>
+            <td>@d.FileType</td>
+            <td>@Html.ActionLink("View Details", "Details", "User", new { id = d.DocumentId }, null)</td>
+            <td>@d.CreatedOn</td>
+            <td>@Html.ActionLink("Unsubscription", "UnSubscription", "User", new { id = d.DocumentId }, null)</td>
+        </tr>
     }
 </table>  

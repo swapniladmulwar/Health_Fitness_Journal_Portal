@@ -16,6 +16,18 @@ namespace HealthBAL
             _healthDALOperation = healthDALOperation ?? throw new ArgumentNullException(nameof(healthDALOperation));
         }
 
+        public async Task<bool> AddSubscription(string documentId, string username)
+        {
+            var subscriptionDAL = new SubscriberDAL
+            {
+                DocumentId = int.Parse(documentId),
+                Name = username.ToLower(),
+                SubscriberId = 0
+            };
+
+            return await _healthDALOperation.AddSubscriptionAsync(subscriptionDAL);
+        }
+
         public async Task<byte[]> GetFileAsync(string documentId)
         {
             return await _healthDALOperation.GetFileAsync(documentId);
@@ -25,6 +37,44 @@ namespace HealthBAL
         {
             var responseBAL = new List<FileBAL>();
             var responseDAL = await _healthDALOperation.GetFilesAsync(userName);
+            foreach (var dal in responseDAL)
+            {
+                responseBAL.Add(new FileBAL
+                {
+                    CreatedBy = dal.CreatedBy,
+                    CreatedOn = dal.CreatedOn,
+                    DataFiles = dal.DataFiles,
+                    DocumentId = dal.DocumentId,
+                    FileType = dal.FileType,
+                    Name = dal.Name
+                });
+            }
+            return responseBAL;
+        }
+
+        public async Task<IEnumerable<FileBAL>> GetHealthJournalsBySearchKey(string searchKey)
+        {
+            var responseBAL = new List<FileBAL>();
+            var responseDAL = await _healthDALOperation.GetSearchedFilesAsync(searchKey);
+            foreach (var dal in responseDAL)
+            {
+                responseBAL.Add(new FileBAL
+                {
+                    CreatedBy = dal.CreatedBy,
+                    CreatedOn = dal.CreatedOn,
+                    DataFiles = dal.DataFiles,
+                    DocumentId = dal.DocumentId,
+                    FileType = dal.FileType,
+                    Name = dal.Name
+                });
+            }
+            return responseBAL;
+        }
+
+        public async Task<IEnumerable<FileBAL>> GetSubscribedHealthJournals(string userName)
+        {
+            var responseBAL = new List<FileBAL>();
+            var responseDAL = await _healthDALOperation.GetSubscribedFilesAsync(userName);
             foreach (var dal in responseDAL)
             {
                 responseBAL.Add(new FileBAL
@@ -70,6 +120,11 @@ namespace HealthBAL
                 return true;
             }
             return false;
+        }
+
+        public async Task<bool> RemoveSubscription(string documentId)
+        {
+            return await _healthDALOperation.RemoveSubscriptionAsync(documentId);
         }
     }
 }

@@ -65,6 +65,7 @@ namespace Health
             services.AddTransient<IHealthBALOperation, HealthBALOperation>();
             services.AddTransient<IHealthDALOperation, HealthDALOperation>();
             services.AddDbContext<FileDBContext>();
+            services.AddDbContext<SubscriberContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
