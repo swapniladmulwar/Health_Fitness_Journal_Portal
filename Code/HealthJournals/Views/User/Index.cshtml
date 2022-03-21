@@ -33,8 +33,7 @@
         <tr>
             <td>@d.DocumentId</td>
             <td>@d.Name</td>
-            <td>@d.FileType</td>
-            <td>@Html.ActionLink("View Details", "Details", "User", new { id = d.DocumentId }, null)</td>
+            <td>@d.FileType</td>            
             <td>@d.CreatedOn</td>
             <td>@Html.ActionLink("Subscribtion", "Subscribtion", "User", new { id = d.DocumentId }, null)</td>
         </tr>
