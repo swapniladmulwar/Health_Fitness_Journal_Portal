@@ -100,6 +100,10 @@ namespace HealthBAL
                     var fileName = Path.GetFileName(files.FileName);
                     //Getting file Extension
                     var fileExtension = Path.GetExtension(fileName);
+                    if (!fileExtension.Equals(".pdf"))
+                    {
+                        return false;
+                    }
 
                     var objfiles = new FileDAL()
                     {

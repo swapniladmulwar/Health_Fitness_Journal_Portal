@@ -31,6 +31,10 @@ namespace Health.Controllers
         {
             var userName = User.Claims.First(c => c.Type == "email").Value;
             var isSuccess =_healthBALOperation.InsertHealthJournals(files, userName).Result;
+            if (!isSuccess)
+            {
+                TempData["ErrorMessage"] = "Please upload only PDF files.";
+            }
             return RedirectToAction("Index", "Admin");
         }
 

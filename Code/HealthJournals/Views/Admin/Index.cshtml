@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    var error = (string)TempData["ErrorMessage"];
 }
 <div><b>Health and Fitness Journals</b><br /></div>
 <br />
@@ -23,8 +24,19 @@
             <td>@d.CreatedOn</td>
         </tr>
 
-    }    
-</table>  
+    }
+</table>
+
+<td>
+    @if (error != null && error.Length > 0)
+    {
+        <div>
+            <span style='color: red;'>
+                @error
+            </span>
+        </div>
+    }
+</td>
 
 <div class="row">
     <div class="col-md-5">

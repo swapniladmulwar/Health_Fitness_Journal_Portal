@@ -29,9 +29,9 @@ namespace Health.Controllers
             return RedirectToAction("Index", "User");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Logout()
         {
-            return View();
+            return SignOut("Cookies", "oidc");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
